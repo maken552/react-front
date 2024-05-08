@@ -30,5 +30,6 @@ jobs:
         SSH_KEY="/home/runner/.ssh/id_rsa"
         echo "$SSH_KEY" > 1.txt && echo $(pwd)
         ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" runner@203.161.46.22 \
-        "echo '1' > 1.txt && \
-        echo $(pwd) >> 1.txt"
+        "cd /home/runner/docker/docker/digvault && git pull origin main && \
+        yarn install && yarn build && \
+        cd /home/runner/docker/docker/frontend && rm -rf * && cp -r /home/runner/docker/docker/digvault/* ."
