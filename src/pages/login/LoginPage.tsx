@@ -1,4 +1,4 @@
-import { Typography } from '@material-tailwind/react'
+import { Spinner, Typography } from '@material-tailwind/react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
@@ -29,6 +29,8 @@ export const LoginPage = () => {
 
   const [isLoginDisabled, setIsLoginDisabled] = useState(true)
 
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     const isEmailFilled = userInformation.email.length > 0
     const isPasswordFilled = userInformation.password.length > 0
@@ -37,6 +39,7 @@ export const LoginPage = () => {
   }, [userInformation, isLoginDisabled])
 
   const handleLoginClick = () => {
+    setLoading(true)
     console.log('login pushed', userInformation)
     axios
       .post(`${DOMAIN}/api/login`, {
@@ -55,6 +58,7 @@ export const LoginPage = () => {
         navigate(AppRoutePath.DASHBOARD())
       })
       .catch(function (error) {
+        setLoading(false)
         console.log(error)
       })
   }
@@ -67,45 +71,52 @@ export const LoginPage = () => {
           <img src="/main_logo.svg" />
         </a>
       </header>
-      <section className="py-[48px]">
-        <div className="mx-auto w-full max-w-[520px] px-6">
-          <Typography className="text-[32px] font-semibold leading-[48px] text-[#0a0b0d] max-sm:text-[24px]">
-            Login
-          </Typography>
-          <Typography className="text-[16px] font-normal leading-6 text-[#7F8992] max-sm:text-[14px]">
-            Enter your email and password to continue
-          </Typography>
-          <form className="mt-10 flex flex-col gap-4" action="/api/test">
-            <InputText
-              type="email"
-              name="email"
-              label="Email"
-              placeholder="Enter your email"
-              className="w-full"
-              value={userInformation.email}
-              onChange={handleFormInputChange}
-            />
-            <InputText
-              type="password"
-              name="password"
-              label="Password"
-              placeholder="Enter your password"
-              className="w-full"
-              value={userInformation.password}
-              onChange={handleFormInputChange}
-            />
-            <div className="mt-8 flex items-center justify-end">
-              <Button
-                type="primary"
-                onClick={handleLoginClick}
-                disabled={!isLoginDisabled}
-              >
-                Log in
-              </Button>
-            </div>
-          </form>
+      {loading && (
+        <div className="flex h-[80vh] w-full items-center justify-center">
+          <Spinner />
         </div>
-      </section>
+      )}
+      {!loading && (
+        <section className="py-[48px]">
+          <div className="mx-auto w-full max-w-[520px] px-6">
+            <Typography className="text-[32px] font-semibold leading-[48px] text-[#0a0b0d] max-sm:text-[24px]">
+              Login
+            </Typography>
+            <Typography className="text-[16px] font-normal leading-6 text-[#7F8992] max-sm:text-[14px]">
+              Enter your email and password to continue
+            </Typography>
+            <form className="mt-10 flex flex-col gap-4" action="/api/test">
+              <InputText
+                type="email"
+                name="email"
+                label="Email"
+                placeholder="Enter your email"
+                className="w-full"
+                value={userInformation.email}
+                onChange={handleFormInputChange}
+              />
+              <InputText
+                type="password"
+                name="password"
+                label="Password"
+                placeholder="Enter your password"
+                className="w-full"
+                value={userInformation.password}
+                onChange={handleFormInputChange}
+              />
+              <div className="mt-8 flex items-center justify-end">
+                <Button
+                  type="primary"
+                  onClick={handleLoginClick}
+                  disabled={!isLoginDisabled}
+                >
+                  Log in
+                </Button>
+              </div>
+            </form>
+          </div>
+        </section>
+      )}
     </div>
   )
 }
