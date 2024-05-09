@@ -15,6 +15,7 @@ import { CloudPage } from '@/pages/cloud/CloudPage'
 import { ContactPage } from '@/pages/contact/ContactPage'
 import { DashboardPage } from '@/pages/dashboard/DashboardPage'
 import { DashboardMiningPage } from '@/pages/dashboard/mining/DashboardMiningPage'
+import { DashboardMiningRentalPage } from '@/pages/dashboard/mining/DashboardMiningRentalPage'
 import { HomePage } from '@/pages/home/HomePage'
 import { LegalPage } from '@/pages/legal/LegalPage'
 import { PrivacyPage } from '@/pages/legal/PrivacyPage'
@@ -59,7 +60,19 @@ const App = () => {
           />
           <Route
             path={AppRoutePath.DASHBOARD_MINING()}
-            element={<DashboardMiningPage />}
+            element={
+              <ProtectedRoute>
+                <DashboardMiningPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={AppRoutePath.DASHBOARD_MINING_RENT()}
+            element={
+              <ProtectedRoute>
+                <DashboardMiningRentalPage />
+              </ProtectedRoute>
+            }
           />
           <Route path="*" element={<p>There&apos;s nothing here: 404!</p>} />
         </Routes>

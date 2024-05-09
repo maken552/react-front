@@ -13,5 +13,6 @@ export const AppRoutePath = {
   PRIVACY: () => '/privacy',
   TERMS: () => '/terms',
   DASHBOARD: () => '/dashboard',
-  DASHBOARD_MINING: () => '/dashboard/mining'
+  DASHBOARD_MINING: () => '/dashboard/mining',
+  DASHBOARD_MINING_RENT: () => '/dashboard/mining/rent'
 }

@@ -1,5 +1,6 @@
 import { Typography } from '@material-tailwind/react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { AppRoutePath } from '@/app/appRoutePath'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
@@ -285,24 +286,26 @@ export const DashboardPage = () => {
                 Most affordable way to start earning BTC. Get Bitcoins daily
                 from anywhere in the world, starting at just $150.
               </Typography>
-              <button
-                className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]"
-                onClick={handleOpen}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
+              <Link to={AppRoutePath.DASHBOARD_MINING_RENT()}>
+                <button
+                  className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]"
+                  // onClick={handleOpen}
                 >
-                  <path
-                    d="M8.66675 6.66667H13.3334L7.33341 15.3333V9.33334H2.66675L8.66675 0.666672V6.66667Z"
-                    fill="#0667EA"
-                  />
-                </svg>
-                Start Mining
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M8.66675 6.66667H13.3334L7.33341 15.3333V9.33334H2.66675L8.66675 0.666672V6.66667Z"
+                      fill="#0667EA"
+                    />
+                  </svg>
+                  Start Mining
+                </button>
+              </Link>
             </DashboardCard>
             <DashboardCard className="w-full">
               <Typography className="text-[16px] font-medium leading-6 text-[#000]">
@@ -312,24 +315,26 @@ export const DashboardPage = () => {
                 Rent top-notch ASIC Miners hosted at ECOS Data Centre! Start
                 mining now.
               </Typography>
-              <button
-                className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]"
-                onClick={handleOpen}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
+              <Link to={AppRoutePath.DASHBOARD_MINING_RENT()}>
+                <button
+                  className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]"
+                  // onClick={handleOpen}
                 >
-                  <path
-                    d="M8.66675 6.66667H13.3334L7.33341 15.3333V9.33334H2.66675L8.66675 0.666672V6.66667Z"
-                    fill="#0667EA"
-                  />
-                </svg>
-                Start Mining
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M8.66675 6.66667H13.3334L7.33341 15.3333V9.33334H2.66675L8.66675 0.666672V6.66667Z"
+                      fill="#0667EA"
+                    />
+                  </svg>
+                  Start Mining
+                </button>
+              </Link>
             </DashboardCard>
           </div>
           <DashboardCard className="w-full">
