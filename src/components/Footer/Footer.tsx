@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { AppRoutePath } from '@/app/appRoutePath'
 import { Container } from '@/atoms/Container/Container'
 
@@ -9,63 +11,63 @@ export const Footer = () => {
           <div className="flex justify-between gap-[32px] max-sm:flex-wrap">
             <div className="flex w-[220px] flex-col gap-2">
               <p className="font-medium leading-6 text-[#fff]">Products</p>
-              <a
-                href={AppRoutePath.CLOUD()}
+              <Link
+                to={AppRoutePath.CLOUD()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Cloud Mining
-              </a>
-              <a
-                href={AppRoutePath.MINERS()}
+              </Link>
+              <Link
+                to={AppRoutePath.MINERS()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Bitcoin Mining
-              </a>
+              </Link>
             </div>
             <div className="flex w-[220px] flex-col gap-2">
               <p className="font-medium leading-6 text-[#fff]">Company</p>
-              <a
-                href={AppRoutePath.ABOUT()}
+              <Link
+                to={AppRoutePath.ABOUT()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 About us
-              </a>
-              <a
-                href={AppRoutePath.SECURITY()}
+              </Link>
+              <Link
+                to={AppRoutePath.SECURITY()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Security
-              </a>
-              <a
-                href={AppRoutePath.CONTACT()}
+              </Link>
+              <Link
+                to={AppRoutePath.CONTACT()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Contact
-              </a>
+              </Link>
               {/* <a href="#" className="text-xs leading-[20px] text-[#8D91A1]">
                 Licenses
               </a> */}
             </div>
             <div className="flex w-[220px] flex-col gap-2">
               <p className="font-medium leading-6 text-[#fff]">Legal</p>
-              <a
-                href={AppRoutePath.LEGAL()}
+              <Link
+                to={AppRoutePath.LEGAL()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Legals
-              </a>
-              <a
-                href={AppRoutePath.PRIVACY()}
+              </Link>
+              <Link
+                to={AppRoutePath.PRIVACY()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Privacy
-              </a>
-              <a
-                href={AppRoutePath.TERMS()}
+              </Link>
+              <Link
+                to={AppRoutePath.TERMS()}
                 className="text-xs leading-[20px] text-[#8D91A1]"
               >
                 Terms & Conditions
-              </a>
+              </Link>
             </div>
           </div>
           {/* TODO: Language Switcher */}
