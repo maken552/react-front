@@ -42,13 +42,22 @@ export const DashboardPage = () => {
             </div>
             {/* Right Side */}
             <div className="flex items-center gap-2 max-sm:w-full max-sm:justify-start">
-              <button className="rounded-[32px] bg-[#FFD915] px-4 py-2 text-sm font-semibold leading-6 text-[#1a212a]">
+              <button
+                className="rounded-[32px] bg-[#FFD915] px-4 py-2 text-sm font-semibold leading-6 text-[#1a212a]"
+                onClick={handleOpen}
+              >
                 Deposit
               </button>
-              <button className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]">
+              <button
+                className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
+                onClick={handleOpen}
+              >
                 Withdraw
               </button>
-              <button className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]">
+              <button
+                className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
+                onClick={handleOpen}
+              >
                 Buy Crypto
               </button>
             </div>
