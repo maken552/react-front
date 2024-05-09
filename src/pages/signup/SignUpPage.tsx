@@ -1,4 +1,4 @@
-import { Typography } from '@material-tailwind/react'
+import { Spinner, Typography } from '@material-tailwind/react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
@@ -93,7 +93,10 @@ export const SignUpPage = () => {
 
   const navigate = useNavigate()
 
+  const [loading, setLoading] = useState(false)
+
   const handleSignUpClick = () => {
+    setLoading(true)
     axios
       .post(`${DOMAIN}/api/register`, {
         email: userInformation.email,
@@ -113,6 +116,7 @@ export const SignUpPage = () => {
         navigate(AppRoutePath.DASHBOARD())
       })
       .catch(function (error) {
+        setLoading(false)
         console.log(error)
       })
   }
@@ -125,116 +129,125 @@ export const SignUpPage = () => {
           <img src="/main_logo.svg" />
         </a>
       </header>
-      {signUpStep === 'personal_information' && (
-        <section className="py-[48px]">
-          <div className="mx-auto w-full max-w-[520px] px-6">
-            <Typography className="text-[32px] font-semibold leading-[48px] text-[#0a0b0d] max-sm:text-[24px]">
-              Personal Information
-            </Typography>
-            <Typography className="text-[16px] font-normal leading-6 text-[#7F8992] max-sm:text-[14px]">
-              Please, as a first step provide personal information below
-            </Typography>
-            <form className="mt-10 flex flex-col gap-4" action="/api/test">
-              <div className="flex items-center gap-4">
-                <InputText
-                  name="first_name"
-                  label="First name"
-                  placeholder="Enter your name"
-                  className="w-full"
-                  value={userInformation.first_name}
-                  onChange={handleFormInputChange}
-                />
-                <InputText
-                  name="last_name"
-                  label="Last name"
-                  placeholder="Enter your last name"
-                  className="w-full"
-                  value={userInformation.last_name}
-                  onChange={handleFormInputChange}
-                />
-              </div>
-              <InputText
-                name="email"
-                label="Email"
-                placeholder="Enter your email"
-                className="w-full"
-                value={userInformation.email}
-                onChange={handleFormInputChange}
-              />
-              <div className="flex items-center gap-4">
-                <InputSelect
-                  name="countryCode"
-                  label="Country"
-                  options={countryOptions}
-                  className="border-[#EBEBF0]"
-                  onClick={handleCountryCodeClick}
-                />
-                <InputText
-                  name="phone"
-                  label="Phone"
-                  placeholder="000 000 000"
-                  className="w-full"
-                  value={userInformation.phone}
-                  onChange={handleFormInputChange}
-                />
-              </div>
-              <div className="mt-8 flex items-center justify-between">
-                <Button type="secondary">Cancel</Button>
-                <Button
-                  type="primary"
-                  onClick={handleContinueClick}
-                  disabled={!nextStepDisabled}
-                >
-                  Continue
-                </Button>
-              </div>
-            </form>
-          </div>
-        </section>
+      {loading && (
+        <div className="flex h-[80vh] w-full items-center justify-center">
+          <Spinner />
+        </div>
       )}
-      {signUpStep === 'security_and_password' && (
-        <section className="py-[48px]">
-          <div className="mx-auto w-full max-w-[520px] px-6">
-            <Typography className="text-[32px] font-semibold leading-[48px] text-[#0a0b0d] max-sm:text-[24px]">
-              Security and Password
-            </Typography>
-            <Typography className="text-[16px] font-normal leading-6 text-[#7F8992] max-sm:text-[14px]">
-              Please set the secured password
-            </Typography>
-            <div className="mt-10 flex flex-col gap-4">
-              <InputText
-                type="password"
-                name="password"
-                label="Password"
-                placeholder="Enter your password"
-                className="w-full"
-                value={userInformation.password}
-                onChange={handleFormInputChange}
-              />
-              <InputText
-                type="password"
-                name="password_repeat"
-                label="Repeat Password"
-                placeholder="Enter your password"
-                className="w-full"
-                value={userInformation.password_repeat}
-                onChange={handleFormInputChange}
-              />
-              <div className="mt-8 flex items-center justify-between">
-                <Button type="secondary" submit>
-                  Cancel
-                </Button>
-                <Button
-                  type="primary"
-                  onClick={handleSignUpClick}
-                  disabled={!isSignUpDisabled}
-                >
-                  Continue
-                </Button>
+      {!loading && (
+        <>
+          {signUpStep === 'personal_information' && (
+            <section className="py-[48px]">
+              <div className="mx-auto w-full max-w-[520px] px-6">
+                <Typography className="text-[32px] font-semibold leading-[48px] text-[#0a0b0d] max-sm:text-[24px]">
+                  Personal Information
+                </Typography>
+                <Typography className="text-[16px] font-normal leading-6 text-[#7F8992] max-sm:text-[14px]">
+                  Please, as a first step provide personal information below
+                </Typography>
+                <form className="mt-10 flex flex-col gap-4" action="/api/test">
+                  <div className="flex items-center gap-4">
+                    <InputText
+                      name="first_name"
+                      label="First name"
+                      placeholder="Enter your name"
+                      className="w-full"
+                      value={userInformation.first_name}
+                      onChange={handleFormInputChange}
+                    />
+                    <InputText
+                      name="last_name"
+                      label="Last name"
+                      placeholder="Enter your last name"
+                      className="w-full"
+                      value={userInformation.last_name}
+                      onChange={handleFormInputChange}
+                    />
+                  </div>
+                  <InputText
+                    name="email"
+                    label="Email"
+                    placeholder="Enter your email"
+                    className="w-full"
+                    value={userInformation.email}
+                    onChange={handleFormInputChange}
+                  />
+                  <div className="flex items-center gap-4">
+                    <InputSelect
+                      name="countryCode"
+                      label="Country"
+                      options={countryOptions}
+                      className="border-[#EBEBF0]"
+                      onClick={handleCountryCodeClick}
+                    />
+                    <InputText
+                      name="phone"
+                      label="Phone"
+                      placeholder="000 000 000"
+                      className="w-full"
+                      value={userInformation.phone}
+                      onChange={handleFormInputChange}
+                    />
+                  </div>
+                  <div className="mt-8 flex items-center justify-between">
+                    <Button type="secondary">Cancel</Button>
+                    <Button
+                      type="primary"
+                      onClick={handleContinueClick}
+                      disabled={!nextStepDisabled}
+                    >
+                      Continue
+                    </Button>
+                  </div>
+                </form>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
+          )}
+          {signUpStep === 'security_and_password' && (
+            <section className="py-[48px]">
+              <div className="mx-auto w-full max-w-[520px] px-6">
+                <Typography className="text-[32px] font-semibold leading-[48px] text-[#0a0b0d] max-sm:text-[24px]">
+                  Security and Password
+                </Typography>
+                <Typography className="text-[16px] font-normal leading-6 text-[#7F8992] max-sm:text-[14px]">
+                  Please set the secured password
+                </Typography>
+                <div className="mt-10 flex flex-col gap-4">
+                  <InputText
+                    type="password"
+                    name="password"
+                    label="Password"
+                    placeholder="Enter your password"
+                    className="w-full"
+                    value={userInformation.password}
+                    onChange={handleFormInputChange}
+                  />
+                  <InputText
+                    type="password"
+                    name="password_repeat"
+                    label="Repeat Password"
+                    placeholder="Enter your password"
+                    className="w-full"
+                    value={userInformation.password_repeat}
+                    onChange={handleFormInputChange}
+                  />
+                  <div className="mt-8 flex items-center justify-between">
+                    <Button type="secondary" submit>
+                      Cancel
+                    </Button>
+                    <Button
+                      type="primary"
+                      onClick={handleSignUpClick}
+                      disabled={!isSignUpDisabled}
+                    >
+                      Continue
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
     </div>
   )
