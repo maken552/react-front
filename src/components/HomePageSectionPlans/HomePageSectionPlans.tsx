@@ -1,11 +1,16 @@
 import { Typography } from '@material-tailwind/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { AppRoutePath } from '@/app/appRoutePath'
 import { Container } from '@/atoms/Container/Container'
 import { MininPlanMocks } from '@/mocks/HomePageMocks'
+import { CloudMinerCard } from '@/pages/dashboard/mining/DashboardMiningRentalPage'
 
 export const HomePageSectionPlans = () => {
+  const navigate = useNavigate()
+  const onRentClick = () => {
+    navigate(AppRoutePath.SIGNUP())
+  }
   return (
     <section className="bg-[#F4F8FE] py-[80px]">
       <Container>
@@ -17,8 +22,8 @@ export const HomePageSectionPlans = () => {
           efficiency to the fullest. Simply select a plan and generate a
           contract with just a few clicks.
         </Typography>
-        <div className="mt-[80px] grid grid-cols-3 gap-[20px] max-sm:grid-cols-1">
-          {MininPlanMocks.map(
+        <div className="mt-[80px] grid grid-cols-2 gap-[20px] max-sm:grid-cols-1">
+          {/* {MininPlanMocks.map(
             ({ label, title, name, price, service, rating }, index) => (
               <div key={index} className="rounded-[16px] bg-[#fff] p-4">
                 <Typography className="ml-2 text-xs font-semibold leading-4 text-[#0667ea]">
@@ -70,7 +75,35 @@ export const HomePageSectionPlans = () => {
                 </div>
               </div>
             )
-          )}
+          )} */}
+          <CloudMinerCard
+            name="Bitmain Antminer S19K Pro 115TH/s"
+            price="$1600"
+            duration="12 Months"
+            perDay="$4.37"
+            onClick={onRentClick}
+          />
+          <CloudMinerCard
+            name="Bitmain Antminer S19K Pro 115TH/s"
+            price="$2150"
+            duration="24 Months"
+            perDay="$2.94"
+            onClick={onRentClick}
+          />
+          <CloudMinerCard
+            name="Bitmain Antminer S21 188TH/s"
+            price="$3450"
+            duration="12 Months"
+            perDay="$9.43"
+            onClick={onRentClick}
+          />
+          <CloudMinerCard
+            name="Bitmain Antminer S19K Pro 115TH/s"
+            price="$4650"
+            duration="24 Months"
+            perDay="$6.35"
+            onClick={onRentClick}
+          />
         </div>
         {/* <div className="mt-8 flex w-full items-center justify-center gap-2">
           <div className="h-2 w-2 rounded-full bg-[#0667EA]" />
