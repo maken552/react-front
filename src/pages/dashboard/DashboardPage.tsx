@@ -185,7 +185,10 @@ export const DashboardPage = () => {
                   </td>
                   <td>
                     <div className="flex items-center justify-end">
-                      <button className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]">
+                      <button
+                        className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
+                        onClick={handleOpen}
+                      >
                         Buy
                       </button>
                     </div>
@@ -231,7 +234,10 @@ export const DashboardPage = () => {
                   </td>
                   <td>
                     <div className="flex items-center justify-end">
-                      <button className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]">
+                      <button
+                        className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
+                        onClick={handleOpen}
+                      >
                         Buy
                       </button>
                     </div>
@@ -277,7 +283,10 @@ export const DashboardPage = () => {
                   </td>
                   <td>
                     <div className="flex items-center justify-end">
-                      <button className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]">
+                      <button
+                        className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
+                        onClick={handleOpen}
+                      >
                         Buy
                       </button>
                     </div>
