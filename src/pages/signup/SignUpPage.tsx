@@ -21,7 +21,11 @@ export const SignUpPage = () => {
   const countryOptions = countries
     .filter(
       (country: country) =>
-        country.name === 'Germany' || country.name === 'Georgia'
+        country.name === 'Germany' ||
+        country.name === 'Canada' ||
+        country.name === 'United States' ||
+        country.name === 'United Kingdom' ||
+        country.name === 'Australia'
     )
     .map((country: country) => ({
       icon: country.flags.svg,
