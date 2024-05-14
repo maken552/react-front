@@ -39,7 +39,7 @@ export const DashboardPage = () => {
               </Typography>
               <div className="flex items-center gap-2">
                 <Typography className="text-[24px] font-medium leading-[32px] text-[#0a0b0d]">
-                  {balance.toFixed(2)}
+                  {balance && balance.toFixed(2)}
                 </Typography>
                 <div className="rounded-[8px] bg-[#F7F7F9] px-2 py-1">
                   <Typography className="text-xs font-medium leading-4 text-[#0a0b0d]">
@@ -178,7 +178,7 @@ export const DashboardPage = () => {
                               {coin.balance}
                             </Typography>
                             <Typography className="text-end text-xs leading-4 text-[#909499]">
-                              {`${coin.to_usd.toFixed(2)}$`}
+                              {`${coin.to_usd && coin.to_usd.toFixed(2)}$`}
                             </Typography>
                           </div>
                         </div>
@@ -187,13 +187,15 @@ export const DashboardPage = () => {
                         <div className="flex items-center justify-end gap-3">
                           <div className="flex flex-col">
                             <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                              {coin.usd_price.USD.toFixed(2)}
+                              {coin.usd_price.USD &&
+                                coin.usd_price.USD.toFixed(2)}
                               {/* $70,572 */}
                             </Typography>
                             <Typography className="text-end text-xs leading-4 text-[#909499]">
-                              {`${coin.usd_price.percent_change_1h.toFixed(
-                                2
-                              )}%`}
+                              {`${
+                                coin.usd_price.percent_change_1h &&
+                                coin.usd_price.percent_change_1h.toFixed(2)
+                              }%`}
                             </Typography>
                           </div>
                         </div>
