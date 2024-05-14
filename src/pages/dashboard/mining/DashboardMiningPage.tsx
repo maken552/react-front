@@ -28,7 +28,7 @@ export const DashboardMiningPage = () => {
             </Typography>
             <Typography className="mt-2 text-sm leading-6 text-[#909499]">
               Most affordable way to start earning BTC. Get Bitcoins daily from
-              anywhere in the world, starting at just $150.
+              anywhere in the world, starting at just $500.
             </Typography>
           </div>
           <div className="grid grid-cols-3 gap-6 py-6 max-sm:grid-cols-1">
