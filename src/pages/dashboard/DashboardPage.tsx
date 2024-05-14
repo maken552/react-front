@@ -178,7 +178,7 @@ export const DashboardPage = () => {
                         <div className="flex items-center justify-end gap-3">
                           <div className="flex flex-col">
                             <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                              {coin.balance}
+                              {parseFloat(coin.balance).toFixed(4)}
                             </Typography>
                             <Typography className="text-end text-xs leading-4 text-[#909499]">
                               {`${coin.to_usd && coin.to_usd.toFixed(2)}$`}
