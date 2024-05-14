@@ -15,6 +15,10 @@ export const DashboardPage = () => {
 
   const balance = useSelector((state: RootState) => state.user.balance_usd)
 
+  const coinTable = useSelector(
+    (state: RootState) => state.user.relationships?.wallets
+  )
+
   return (
     <>
       <div className="flex min-h-screen flex-col">
@@ -149,55 +153,65 @@ export const DashboardPage = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <img src="/logo_btc.png" className="h-6 w-6" />
-                      <div className="flex flex-col">
-                        <Typography className="text-[16px] font-medium leading-6 text-[#000]">
-                          BTC
-                        </Typography>
-                        <Typography className="text-xs leading-4 text-[#909499]">
-                          Bitcoin
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="flex flex-col">
-                        <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                          0.00
-                        </Typography>
-                        <Typography className="text-end text-xs leading-4 text-[#909499]">
-                          0.00
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="flex flex-col">
-                        <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                          $70,572
-                        </Typography>
-                        <Typography className="text-end text-xs leading-4 text-[#909499]">
-                          0.00%
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end">
-                      <button
-                        className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
-                        onClick={handleOpen}
-                      >
-                        Buy
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {coinTable &&
+                  coinTable.map((coin, index) => (
+                    <tr key={index}>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <img src="/logo_btc.png" className="h-6 w-6" />
+                          <div className="flex flex-col">
+                            <Typography className="text-[16px] font-medium leading-6 text-[#000]">
+                              {coin.symbol}
+                              {/* BTC */}
+                            </Typography>
+                            <Typography className="text-xs leading-4 text-[#909499]">
+                              {coin.symbol}
+                              {/* Bitcoin */}
+                            </Typography>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center justify-end gap-3">
+                          <div className="flex flex-col">
+                            <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
+                              {coin.balance}
+                            </Typography>
+                            <Typography className="text-end text-xs leading-4 text-[#909499]">
+                              {`${coin.to_usd.toFixed(2)}$`}
+                            </Typography>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center justify-end gap-3">
+                          <div className="flex flex-col">
+                            <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
+                              {coin.usd_price.USD.toFixed(2)}
+                              {/* $70,572 */}
+                            </Typography>
+                            <Typography className="text-end text-xs leading-4 text-[#909499]">
+                              {`${coin.usd_price.percent_change_1h.toFixed(
+                                2
+                              )}%`}
+                            </Typography>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center justify-end">
+                          <button
+                            className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
+                            onClick={handleOpen}
+                          >
+                            Buy
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+              {/* <tbody>
                 <tr>
                   <td>
                     <div className="flex items-center gap-3">
@@ -296,7 +310,7 @@ export const DashboardPage = () => {
                     </div>
                   </td>
                 </tr>
-              </tbody>
+              </tbody> */}
             </table>
           </DashboardCard>
           <div className="flex gap-6 py-6">

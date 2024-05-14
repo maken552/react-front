@@ -5,11 +5,26 @@ import { AppRoutePath } from '@/app/appRoutePath'
 import { Button } from '@/atoms/Button/Button'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
-import { DialogVerification } from '@/components/DialogVerification/DialogVerification'
+import { DialogSubmitted } from '@/components/DialogSubmitted/DialogSubmitted'
 
 export const DashboardMiningCloudPage = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
+
+  const [hashrate, setHashrate] = useState(0)
+
+  const increaseHashrate = () => {
+    setHashrate(hashrate + 0.1)
+  }
+
+  const decreateHashrate = () => {
+    if (hashrate - 0.1 > 0) {
+      setHashrate(hashrate - 0.1)
+    } else {
+      setHashrate(0)
+    }
+  }
+
   return (
     <>
       <div className="flex min-h-screen flex-col">
@@ -37,7 +52,10 @@ export const DashboardMiningCloudPage = () => {
                 Select Harshrate
               </Typography>
               <div className="mt-4 flex items-center justify-between rounded-[17px] bg-[#F4F8FD] px-6 py-4">
-                <button className="flex h-[40px] w-[56px] items-center justify-center rounded-[32px] border border-[#E4E4E4] bg-[#fff]">
+                <button
+                  onClick={decreateHashrate}
+                  className="flex h-[40px] w-[56px] items-center justify-center rounded-[32px] border border-[#E4E4E4] bg-[#fff]"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -62,13 +80,16 @@ export const DashboardMiningCloudPage = () => {
                     />
                   </svg>
                   <Typography className="text-[24px] font-medium leading-[32px] text-[#0a0b0d]">
-                    0.00
+                    {hashrate.toFixed(2)}
                   </Typography>
                   <div className="rounded-[8px] bg-[#FFD915] px-2 py-1 text-sm font-semibold leading-4 text-[#0a0b0d]">
                     TH/s
                   </div>
                 </div>
-                <button className="flex h-[40px] w-[56px] items-center justify-center rounded-[32px] border border-[#E4E4E4] bg-[#fff]">
+                <button
+                  onClick={increaseHashrate}
+                  className="flex h-[40px] w-[56px] items-center justify-center rounded-[32px] border border-[#E4E4E4] bg-[#fff]"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -84,7 +105,7 @@ export const DashboardMiningCloudPage = () => {
                 </button>
               </div>
               <div className="flex w-full items-center justify-end">
-                <Button type="primary" className="mt-4">
+                <Button onClick={handleOpen} type="primary" className="mt-4">
                   Buy Hashrate
                 </Button>
               </div>
@@ -112,7 +133,7 @@ export const DashboardMiningCloudPage = () => {
           </a>
         </footer>
       </div>
-      <DialogVerification open={open} handleOpen={handleOpen} />
+      <DialogSubmitted open={open} handleOpen={handleOpen} />
     </>
   )
 }

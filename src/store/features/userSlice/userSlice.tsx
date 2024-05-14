@@ -4,8 +4,8 @@ interface IUserState {
   created_at: string
   email: string
   id: number
-  relationships: {
-    wallets: []
+  relationships?: {
+    wallets: ICoin[]
   }
   token: string
   updated_at: string
@@ -14,13 +14,25 @@ interface IUserState {
   balance_usd: number
 }
 
+interface ICoin {
+  balance: string
+  client_id: number
+  coin_id: number
+  created_at: string
+  id: number
+  symbol: string
+  to_usd: number
+  updated_at: string
+  usd_price: {
+    USD: number
+    percent_change_1h: number
+  }
+}
+
 const initialState: IUserState = {
   created_at: '',
   email: '',
   id: 0,
-  relationships: {
-    wallets: []
-  },
   token: '',
   updated_at: '',
   first_name: '',

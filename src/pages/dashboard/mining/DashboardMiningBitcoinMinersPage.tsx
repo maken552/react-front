@@ -8,7 +8,7 @@ import IconUSD from '@/assets/Icons/IconUSD'
 import { Button } from '@/atoms/Button/Button'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
-import { DialogVerification } from '@/components/DialogVerification/DialogVerification'
+import { DialogSubmitted } from '@/components/DialogSubmitted/DialogSubmitted'
 import { RootState } from '@/store'
 
 export const DashboardMiningBitcoinMinersPage = () => {
@@ -80,7 +80,7 @@ export const DashboardMiningBitcoinMinersPage = () => {
           </a>
         </footer>
       </div>
-      <DialogVerification open={open} handleOpen={handleOpen} />
+      <DialogSubmitted open={open} handleOpen={handleOpen} />
     </>
   )
 }

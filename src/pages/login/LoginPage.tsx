@@ -51,6 +51,8 @@ export const LoginPage = () => {
         // set access token
         Cookies.set('token', response.data.data.token)
 
+        console.log('user', response.data.data)
+
         // TODO: set user data in redux
         dispatch(setUser(response.data.data))
 
