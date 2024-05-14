@@ -93,7 +93,7 @@ export const DashboardMiningPage = () => {
                 Most affordable way to start earning BTC. Get Bitcoins daily
                 from anywhere in the world, starting at just $150.
               </Typography>
-              <Link to={AppRoutePath.DASHBOARD_MINING_RENT()}>
+              <Link to={AppRoutePath.DASHBOARD_MINING_CLOUD()}>
                 <button
                   className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]"
                   // onClick={handleOpen}
@@ -152,24 +152,23 @@ export const DashboardMiningPage = () => {
               Get your Bitcoin Miner in DigVault Data Centre and control your
               BTC rewards remotely!
             </Typography>
-            <button
-              className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]"
-              onClick={handleOpen}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-              >
-                <path
-                  d="M8.66675 6.66667H13.3334L7.33341 15.3333V9.33334H2.66675L8.66675 0.666672V6.66667Z"
-                  fill="#0667EA"
-                />
-              </svg>
-              Get an offer
-            </button>
+            <Link to={AppRoutePath.DASHBOARD_MINING_BITCOIN()}>
+              <button className="flex items-center gap-2 pt-4 text-sm font-medium leading-4 text-[#0667EA]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M8.66675 6.66667H13.3334L7.33341 15.3333V9.33334H2.66675L8.66675 0.666672V6.66667Z"
+                    fill="#0667EA"
+                  />
+                </svg>
+                Get an offer
+              </button>
+            </Link>
           </DashboardCard>
         </section>
         <footer className="mt-auto flex items-center justify-center gap-6 py-8">

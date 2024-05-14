@@ -13,7 +13,10 @@ export const DashboardMiningRentalPage = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
 
-  const RentalList = useSelector((state: RootState) => state.rentals)
+  const RentalList = useSelector(
+    (state: RootState) => state.rentals.minerRentalList
+  )
+
   return (
     <>
       <div className="flex min-h-screen flex-col">

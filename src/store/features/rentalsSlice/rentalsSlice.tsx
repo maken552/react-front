@@ -1,16 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { fetchRentalsDataFromAPI } from '@/api/slices/Rentals.api'
-import { IRental } from '@/types/devices-data.types'
+import { IBitcoinMiner, IRental } from '@/types/devices-data.types'
 
-const initialState: IRental[] = []
+interface IState {
+  minerRentalList: IRental[]
+  bitcoinMinerList: IBitcoinMiner[]
+}
+
+const initialState: IState = {
+  minerRentalList: [],
+  bitcoinMinerList: []
+}
 
 export const rentalsSlice = createSlice({
   name: 'rentals',
   initialState,
   reducers: {
-    setRental: (state, action: PayloadAction<IRental[]>) => {
-      return action.payload
+    setMinerList: (state, action: PayloadAction<IRental[]>) => {
+      state.minerRentalList = action.payload
+    },
+    setBitcoinList: (state, action: PayloadAction<IBitcoinMiner[]>) => {
+      state.bitcoinMinerList = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -21,6 +32,6 @@ export const rentalsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setRental } = rentalsSlice.actions
+export const { setMinerList, setBitcoinList } = rentalsSlice.actions
 
 export default rentalsSlice.reducer

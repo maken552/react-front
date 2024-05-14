@@ -11,6 +11,7 @@ interface IUserState {
   updated_at: string
   first_name: string
   last_name: string
+  balance_usd: number
 }
 
 const initialState: IUserState = {
@@ -23,7 +24,8 @@ const initialState: IUserState = {
   token: '',
   updated_at: '',
   first_name: '',
-  last_name: ''
+  last_name: '',
+  balance_usd: 0
 }
 
 export const userSlice = createSlice({

@@ -13,7 +13,9 @@ export const HomePageSectionPlans = () => {
     navigate(AppRoutePath.SIGNUP())
   }
 
-  const RentalList = useSelector((state: RootState) => state.rentals)
+  const RentalList = useSelector(
+    (state: RootState) => state.rentals.minerRentalList
+  )
 
   return (
     <section className="bg-[#F4F8FE] py-[80px]">

@@ -16,6 +16,8 @@ import { AboutPage } from '@/pages/about/AboutPage'
 import { CloudPage } from '@/pages/cloud/CloudPage'
 import { ContactPage } from '@/pages/contact/ContactPage'
 import { DashboardPage } from '@/pages/dashboard/DashboardPage'
+import { DashboardMiningBitcoinMinersPage } from '@/pages/dashboard/mining/DashboardMiningBitcoinMinersPage'
+import { DashboardMiningCloudPage } from '@/pages/dashboard/mining/DashboardMiningCloudPage'
 import { DashboardMiningPage } from '@/pages/dashboard/mining/DashboardMiningPage'
 import { DashboardMiningRentalPage } from '@/pages/dashboard/mining/DashboardMiningRentalPage'
 import { HomePage } from '@/pages/home/HomePage'
@@ -75,6 +77,22 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <DashboardMiningRentalPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={AppRoutePath.DASHBOARD_MINING_CLOUD()}
+            element={
+              <ProtectedRoute>
+                <DashboardMiningCloudPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={AppRoutePath.DASHBOARD_MINING_BITCOIN()}
+            element={
+              <ProtectedRoute>
+                <DashboardMiningBitcoinMinersPage />
               </ProtectedRoute>
             }
           />
