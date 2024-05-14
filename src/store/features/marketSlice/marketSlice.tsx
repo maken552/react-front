@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { fetchRentalsDataFromAPI } from '@/api/slices/Rentals.api'
+import { fetchMarketDataFromAPI } from '@/api/slices/Market.api'
 import { IDevice } from '@/types/devices-data.types'
 
 const initialState: IDevice[] = []
@@ -14,7 +14,7 @@ export const marketSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchRentalsDataFromAPI.fulfilled, (state, action) => {
+    builder.addCase(fetchMarketDataFromAPI.fulfilled, (state, action) => {
       return action.payload
     })
   }
