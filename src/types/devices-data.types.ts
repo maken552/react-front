@@ -10,3 +10,14 @@ export interface IDevice {
   name: string
   price: string
 }
+
+export interface IRental {
+  active: number
+  duration: string
+  id: number
+  per_day: number
+  price: string
+  relationships: {
+    device?: IDevice
+  }
+}

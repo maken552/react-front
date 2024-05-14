@@ -2,12 +2,16 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import devicesSliceReducer from './features/devicesSlice/devicesSlice'
 import faqSliceReducer from './features/faqSlice/faqSlice'
+import marketSliceReducer from './features/marketSlice/marketSlice'
+import rentalsSliceReducer from './features/rentalsSlice/rentalsSlice'
 import userSliceReducer from './features/userSlice/userSlice'
 
 const rootReducer = combineReducers({
   user: userSliceReducer,
   faq: faqSliceReducer,
-  devices: devicesSliceReducer
+  devices: devicesSliceReducer,
+  rentals: rentalsSliceReducer,
+  market: marketSliceReducer
 })
 
 export const store = configureStore({

@@ -1,15 +1,19 @@
 import { Typography } from '@material-tailwind/react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { AppRoutePath } from '@/app/appRoutePath'
 import { Button } from '@/atoms/Button/Button'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
 import { DialogVerification } from '@/components/DialogVerification/DialogVerification'
+import { RootState } from '@/store'
 
 export const DashboardMiningRentalPage = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
+
+  const RentalList = useSelector((state: RootState) => state.rentals)
   return (
     <>
       <div className="flex min-h-screen flex-col">
@@ -32,34 +36,20 @@ export const DashboardMiningRentalPage = () => {
             </Typography>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            <CloudMinerCard
-              name="Bitmain Antminer S19K Pro 115TH/s"
-              price="$1600"
-              duration="12 Months"
-              perDay="$4.37"
-              onClick={handleOpen}
-            />
-            <CloudMinerCard
-              name="Bitmain Antminer S19K Pro 115TH/s"
-              price="$2150"
-              duration="24 Months"
-              perDay="$2.94"
-              onClick={handleOpen}
-            />
-            <CloudMinerCard
-              name="Bitmain Antminer S21 188TH/s"
-              price="$3450"
-              duration="12 Months"
-              perDay="$9.43"
-              onClick={handleOpen}
-            />
-            <CloudMinerCard
-              name="Bitmain Antminer S19K Pro 115TH/s"
-              price="$4650"
-              duration="24 Months"
-              perDay="$6.35"
-              onClick={handleOpen}
-            />
+            {RentalList.map((rental, index) => (
+              <CloudMinerCard
+                key={index}
+                name={
+                  rental.relationships.device
+                    ? rental.relationships.device.name
+                    : ''
+                }
+                price={rental.price}
+                duration={`${rental.duration} Months`}
+                perDay={`$${rental.per_day}`}
+                onClick={handleOpen}
+              />
+            ))}
           </div>
         </section>
         <footer className="mt-auto flex items-center justify-center gap-6 py-8">

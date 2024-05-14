@@ -10,6 +10,8 @@ import {
 
 import { fetchDevicesDataFromAPI } from '@/api/slices/Devices.api'
 import { fetchFAQDataFromAPI } from '@/api/slices/Faq.api'
+import { fetchMarketDataFromAPI } from '@/api/slices/Market.api'
+import { fetchRentalsDataFromAPI } from '@/api/slices/Rentals.api'
 import { AboutPage } from '@/pages/about/AboutPage'
 import { CloudPage } from '@/pages/cloud/CloudPage'
 import { ContactPage } from '@/pages/contact/ContactPage'
@@ -33,6 +35,8 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchDevicesDataFromAPI())
+    dispatch(fetchRentalsDataFromAPI())
+    dispatch(fetchMarketDataFromAPI())
     dispatch(fetchFAQDataFromAPI())
   }, [])
   return (
