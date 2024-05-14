@@ -85,6 +85,7 @@ export const DashboardHeader = () => {
   const handleLogoutClick = () => {
     // remove access token
     Cookies.remove('token')
+    Cookies.remove('userID')
 
     // TODO: purge redux store
 

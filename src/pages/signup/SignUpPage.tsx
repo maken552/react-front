@@ -112,6 +112,7 @@ export const SignUpPage = () => {
 
         // set access token
         Cookies.set('token', response.data.data.token)
+        Cookies.set('userID', response.data.data.id)
 
         // TODO: set user data in redux
         dispatch(setUser(response.data.data))

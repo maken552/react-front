@@ -50,6 +50,7 @@ export const LoginPage = () => {
         console.log(response)
         // set access token
         Cookies.set('token', response.data.data.token)
+        Cookies.set('userID', response.data.data.id)
 
         console.log('user', response.data.data)
 

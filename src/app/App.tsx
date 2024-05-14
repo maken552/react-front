@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -29,8 +30,9 @@ import { MinersPage } from '@/pages/miners/MinersPage'
 import { SecurityPage } from '@/pages/security/SecurityPage'
 import { SignUpPage } from '@/pages/signup/SignUpPage'
 import { AppDispatch } from '@/store'
+import { setUser } from '@/store/features/userSlice/userSlice'
 
-import { AppRoutePath } from './appRoutePath'
+import { AppRoutePath, DOMAIN } from './appRoutePath'
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -41,6 +43,34 @@ const App = () => {
     dispatch(fetchMarketDataFromAPI())
     dispatch(fetchFAQDataFromAPI())
   }, [])
+
+  const token = Cookies.get('token')
+  const userID = Cookies.get('userID')
+
+  if (token && userID) {
+    console.log('token & userID present')
+    axios
+      .get(`${DOMAIN}/api/clients/${userID}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(async function (response) {
+        console.log('client', response)
+
+        // TODO: set user data in redux
+        dispatch(setUser(response.data.data))
+
+        // navigate to dashboard
+        // navigate(AppRoutePath.DASHBOARD())
+      })
+      .catch(function (error) {
+        Cookies.remove('token')
+        Cookies.remove('userID')
+        window.location.pathname = '/'
+        // setLoading(false)
+        console.log(error)
+      })
+  }
+
   return (
     <>
       <Router>

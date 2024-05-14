@@ -158,14 +158,17 @@ export const DashboardPage = () => {
                     <tr key={index}>
                       <td>
                         <div className="flex items-center gap-3">
-                          <img src="/logo_btc.png" className="h-6 w-6" />
+                          <img
+                            src={coin.relationships.coin.logo}
+                            className="h-6 w-6"
+                          />
                           <div className="flex flex-col">
                             <Typography className="text-[16px] font-medium leading-6 text-[#000]">
                               {coin.symbol}
                               {/* BTC */}
                             </Typography>
                             <Typography className="text-xs leading-4 text-[#909499]">
-                              {coin.symbol}
+                              {coin.relationships.coin.name}
                               {/* Bitcoin */}
                             </Typography>
                           </div>

@@ -27,6 +27,12 @@ interface ICoin {
     USD: number
     percent_change_1h: number
   }
+  relationships: {
+    coin: {
+      logo: string
+      name: string
+    }
+  }
 }
 
 const initialState: IUserState = {
