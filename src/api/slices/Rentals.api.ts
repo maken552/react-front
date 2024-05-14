@@ -27,32 +27,24 @@ const createRentalEntry = ({
 const createBitcoinEntry = ({
   active,
   btc_daily_income,
-  btc_monthly_income,
-  btc_yearly_income,
   created_at,
   duration,
   id,
   name,
   price,
   updated_at,
-  usd_daily_income,
-  usd_monthly_income,
-  usd_yearly_income
+  ul
 }: IBitcoinMiner) => {
   return {
     active,
     btc_daily_income,
-    btc_monthly_income,
-    btc_yearly_income,
     created_at,
     duration,
     id,
     name,
     price,
     updated_at,
-    usd_daily_income,
-    usd_monthly_income,
-    usd_yearly_income
+    ul
   }
 }
 
@@ -87,33 +79,25 @@ export const fetchRentalsDataFromAPI = createAsyncThunk(
       ({
         active,
         btc_daily_income,
-        btc_monthly_income,
-        btc_yearly_income,
         created_at,
         duration,
         id,
         name,
         price,
         updated_at,
-        usd_daily_income,
-        usd_monthly_income,
-        usd_yearly_income
+        ul
       }: IBitcoinMiner) => {
         bitcoinMiners.push(
           createBitcoinEntry({
             active,
             btc_daily_income,
-            btc_monthly_income,
-            btc_yearly_income,
             created_at,
             duration,
             id,
             name,
             price,
             updated_at,
-            usd_daily_income,
-            usd_monthly_income,
-            usd_yearly_income
+            ul
           })
         )
       }

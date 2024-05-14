@@ -25,15 +25,22 @@ export interface IRental {
 export interface IBitcoinMiner {
   active: number
   btc_daily_income: string
-  btc_monthly_income: number
-  btc_yearly_income: number
   created_at: string
   duration: number
   id: number
   name: string
   price: string
   updated_at: string
-  usd_daily_income: number
-  usd_monthly_income: number
-  usd_yearly_income: number
+  ul: {
+    btc: {
+      daily: string
+      monthly: number
+      yearly: number
+    }
+    usd: {
+      daily: number
+      monthly: number
+      yearly: number
+    }
+  }
 }

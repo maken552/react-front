@@ -45,15 +45,26 @@ export const DashboardMiningBitcoinMinersPage = () => {
               <PackageCard
                 key={index}
                 name={rental.name}
-                price={parseFloat(rental.price).toFixed(2)}
-                dailyUSD={`${rental.usd_daily_income.toFixed(2)} USD`}
-                monthlyUSD={`${rental.usd_monthly_income.toFixed(2)} USD`}
-                yearlyUSD={`${rental.usd_yearly_income.toFixed(2)} USD`}
-                dailyBTC={`${parseFloat(rental.btc_daily_income).toFixed(
-                  4
-                )} BTC`}
-                monthlyBTC={`${rental.btc_monthly_income.toFixed(4)} BTC`}
-                yearlyBTC={`${rental.btc_yearly_income.toFixed(4)} BTC`}
+                price={rental.price && parseFloat(rental.price).toFixed(2)}
+                dailyUSD={`${
+                  rental.ul.usd.daily && rental.ul.usd.daily.toFixed(2)
+                } USD`}
+                monthlyUSD={`${
+                  rental.ul.usd.monthly && rental.ul.usd.monthly.toFixed(2)
+                } USD`}
+                yearlyUSD={`${
+                  rental.ul.usd.yearly && rental.ul.usd.yearly.toFixed(2)
+                } USD`}
+                dailyBTC={`${
+                  rental.btc_daily_income &&
+                  parseFloat(rental.btc_daily_income).toFixed(4)
+                } BTC`}
+                monthlyBTC={`${
+                  rental.ul.btc.monthly && rental.ul.btc.monthly.toFixed(4)
+                } BTC`}
+                yearlyBTC={`${
+                  rental.ul.btc.yearly && rental.ul.btc.yearly.toFixed(4)
+                } BTC`}
                 onClick={handleOpen}
               />
             ))}
@@ -120,7 +131,7 @@ export const PackageCard = ({
           </Typography>
         </div>
         <div className="rounded-[32px] bg-[#F4F8FD] px-4 py-1 text-sm font-semibold leading-6 text-[#0667ea]">
-          {price}
+          {price}$
         </div>
       </div>
       <div className="flex flex-col gap-2 py-4">
