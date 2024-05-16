@@ -1,0 +1,44 @@
+name: Build Develop
+
+on:
+  push:
+    branches:
+      - develop
+#  workflow_dispatch: #manual dispach of the workflow
+  
+jobs:
+  build:
+    name: Build Develop
+    runs-on: [self-hosted] # Use the label of your self-hosted runner
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
+
+    # - name: Bump version and push tag
+    #   if: github.event_name == 'push'
+    #   uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
+    #     WITH_V: false
+        
+    - name: Deploy org ${{github.ref_name}}
+      #if: ${{ github.ref_name == 'ref/heads/main' }}
+      run: |
+        SSH_KEY="/home/runner/.ssh/id_rsa"
+        echo "$SSH_KEY" > 1.txt && echo $(pwd)
+        ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" runner@203.161.46.22 \
+        "cd /home/runner/docker/docker/react-front && git pull origin develop && \
+        yarn install && yarn build && \
+        cd /home/runner/docker/docker/digvault-dev && rm -rf * && cp -r /home/runner/docker/docker/react-front/dist/* ."
+    - name: Deploy net ${{github.ref_name}}
+      #if: ${{ github.ref_name == 'ref/heads/main' }}
+      run: |
+        SSH_KEY="/home/runner/.ssh/id_rsa"
+        echo "$SSH_KEY" > 1.txt && echo $(pwd)
+        ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" runner@203.161.43.253 \
+        "cd /home/runner/docker/docker/react-front && git pull origin develop && \
+        yarn install && yarn build && \
+        cd /home/runner/docker/docker/frontend-dev && rm -rf * && cp -r /home/runner/docker/docker/react-front/dist/* ."
