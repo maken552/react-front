@@ -1,14 +1,14 @@
-name: Build Production
+name: Build Develop
 
 on:
   push:
     branches:
-      - main
+      - develop
 #  workflow_dispatch: #manual dispach of the workflow
   
 jobs:
   build:
-    name: Build Production
+    name: Build Develop
     runs-on: [self-hosted] # Use the label of your self-hosted runner
     permissions:
       contents: write
@@ -30,15 +30,15 @@ jobs:
         SSH_KEY="/home/runner/.ssh/id_rsa"
         echo "$SSH_KEY" > 1.txt && echo $(pwd)
         ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" runner@203.161.46.22 \
-        "cd /home/runner/docker/docker/digvault && git pull origin main && \
+        "cd /home/runner/docker/docker/react-front && git pull origin develop && \
         yarn install && yarn build && \
-        cd /home/runner/docker/docker/frontend && rm -rf * && cp -r /home/runner/docker/docker/digvault/dist/* ."
+        cd /home/runner/docker/docker/digvault-dev && rm -rf * && cp -r /home/runner/docker/docker/react-front/dist/* ."
     - name: Deploy net ${{github.ref_name}}
       #if: ${{ github.ref_name == 'ref/heads/main' }}
       run: |
         SSH_KEY="/home/runner/.ssh/id_rsa"
         echo "$SSH_KEY" > 1.txt && echo $(pwd)
         ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" runner@203.161.43.253 \
-        "cd /home/runner/docker/docker/digvault && git pull origin main && \
+        "cd /home/runner/docker/docker/react-front && git pull origin develop && \
         yarn install && yarn build && \
-        cd /home/runner/docker/docker/frontend && rm -rf * && cp -r /home/runner/docker/docker/digvault/dist/* ."
+        cd /home/runner/docker/docker/frontend-dev && rm -rf * && cp -r /home/runner/docker/docker/react-front/dist/* ."
