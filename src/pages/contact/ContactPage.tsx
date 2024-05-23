@@ -1,10 +1,14 @@
 import { Typography } from '@material-tailwind/react'
+import { useEffect } from 'react'
 
 import { Container } from '@/atoms/Container/Container'
 import { Footer } from '@/components/Footer/Footer'
 import { Header } from '@/components/Header/Header'
 
 export const ContactPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
   return (
     <>
       <Header />
@@ -61,7 +65,7 @@ export const ContactPage = () => {
               </svg>
               <div className="flex flex-col gap-4">
                 <Typography className="text-[24px] font-normal leading-6 text-[#000]">
-                  +3 (749) 370-5541
+                  +1 (719) 831-6634
                 </Typography>
                 <Typography className="text-[16px] leading-6 text-[#0667ea]">
                   Canada Office

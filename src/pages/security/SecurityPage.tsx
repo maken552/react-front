@@ -1,4 +1,5 @@
 import { Typography } from '@material-tailwind/react'
+import { useEffect } from 'react'
 
 import { Container } from '@/atoms/Container/Container'
 import { Footer } from '@/components/Footer/Footer'
@@ -38,6 +39,9 @@ const AuthorityLogos = [
 ]
 
 export const SecurityPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
   return (
     <>
       <Header />
