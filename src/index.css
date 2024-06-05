@@ -19,3 +19,7 @@ th {
 th, tr, td {
   @apply py-2;
 }
+
+.radio-container > div {
+  @apply w-full flex justify-between;
+}

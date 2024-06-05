@@ -179,7 +179,7 @@ interface IPackageCardItem {
   value: string
 }
 
-const PackageCardItem = ({ icon, name, value }: IPackageCardItem) => {
+export const PackageCardItem = ({ icon, name, value }: IPackageCardItem) => {
   return (
     <div className="flex items-center justify-between rounded-[8px] bg-[#F4F8FD] p-3">
       <div className="flex items-center gap-2">
