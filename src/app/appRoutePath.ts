@@ -17,5 +17,6 @@ export const AppRoutePath = {
   DASHBOARD_MINING_RENT: () => '/dashboard/mining/rent',
   DASHBOARD_MINING_CLOUD: () => '/dashboard/mining/cloud',
   DASHBOARD_MINING_BITCOIN: () => '/dashboard/mining/bitcoin',
-  CLOUD_MINING_PRODUCT_SELECTED: () => '/dashboard/mining/cloud/product'
+  CLOUD_MINING_PRODUCT_SELECTED: () => '/dashboard/mining/cloud/product',
+  BITCOIN_MINING_PRODUCT_SELECTED: () => '/dashboard/mining/bitcoin/product'
 }

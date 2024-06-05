@@ -16,6 +16,7 @@ import { fetchRentalsDataFromAPI } from '@/api/slices/Rentals.api'
 import { AboutPage } from '@/pages/about/AboutPage'
 import { CloudPage } from '@/pages/cloud/CloudPage'
 import { ContactPage } from '@/pages/contact/ContactPage'
+import { BitcoinMiningProductSelected } from '@/pages/dashboard/checkout/BitcoinMiningProductSelected'
 import { CloudMiningProductSelected } from '@/pages/dashboard/checkout/CloudMiningProductSelected'
 import { DashboardPage } from '@/pages/dashboard/DashboardPage'
 import { DashboardMiningBitcoinMinersPage } from '@/pages/dashboard/mining/DashboardMiningBitcoinMinersPage'
@@ -132,6 +133,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <CloudMiningProductSelected />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={AppRoutePath.BITCOIN_MINING_PRODUCT_SELECTED()}
+            element={
+              <ProtectedRoute>
+                <BitcoinMiningProductSelected />
               </ProtectedRoute>
             }
           />

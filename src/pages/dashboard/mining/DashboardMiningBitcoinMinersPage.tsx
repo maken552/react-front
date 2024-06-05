@@ -106,6 +106,7 @@ interface IPackageCard {
   monthlyBTC: string
   yearlyBTC: string
   onClick: () => void
+  hideCallToAction?: boolean
 }
 
 export const PackageCard = ({
@@ -117,24 +118,29 @@ export const PackageCard = ({
   dailyBTC,
   monthlyBTC,
   yearlyBTC,
-  onClick
+  onClick,
+  hideCallToAction
 }: IPackageCard) => {
   return (
     <DashboardCard className="bg-[#fff]">
       <div className="flex items-center justify-between">
         <div className="ml-4 flex flex-col gap-2">
-          <Typography className="text-sm font-normal leading-4 text-[#909499] ">
-            Package
-          </Typography>
+          {!hideCallToAction && (
+            <Typography className="text-sm font-normal leading-4 text-[#909499] ">
+              Package
+            </Typography>
+          )}
           <Typography className="text-[16px] font-medium leading-6 text-[#000]">
             {name}
           </Typography>
         </div>
-        <div className="rounded-[32px] bg-[#F4F8FD] px-4 py-1 text-sm font-semibold leading-6 text-[#0667ea]">
-          {price}$
-        </div>
+        {!hideCallToAction && (
+          <div className="rounded-[32px] bg-[#F4F8FD] px-4 py-1 text-sm font-semibold leading-6 text-[#0667ea]">
+            {price}$
+          </div>
+        )}
       </div>
-      <div className="flex flex-col gap-2 py-4">
+      <div className="flex flex-col gap-2 pt-4">
         <PackageCardItem
           icon={<IconUSD />}
           name="Daily Income"
@@ -166,9 +172,11 @@ export const PackageCard = ({
           value={yearlyBTC}
         />
       </div>
-      <Button type="primary" onClick={onClick}>
-        Buy and Allocate
-      </Button>
+      {!hideCallToAction && (
+        <Button type="primary" onClick={onClick} className="pt-4">
+          Buy and Allocate
+        </Button>
+      )}
     </DashboardCard>
   )
 }
