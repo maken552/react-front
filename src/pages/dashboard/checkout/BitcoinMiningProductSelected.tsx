@@ -8,7 +8,7 @@ import IconUSD from '@/assets/Icons/IconUSD'
 import { Button } from '@/atoms/Button/Button'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
-import { DialogSubmitted } from '@/components/DialogSubmitted/DialogSubmitted'
+import { DialogAmount } from '@/components/DialogAmount/DialogAmount'
 import { RootState } from '@/store'
 
 import { PackageCard } from '../mining/DashboardMiningBitcoinMinersPage'
@@ -237,7 +237,7 @@ export const BitcoinMiningProductSelected = () => {
               </DashboardCard>
             </div>
           </article>
-          <Button type="primary" className="ml-8 mt-10">
+          <Button onClick={handleOpen} type="primary" className="ml-8 mt-10">
             Process with Payment
           </Button>
         </section>
@@ -262,7 +262,12 @@ export const BitcoinMiningProductSelected = () => {
           </a>
         </footer>
       </div>
-      <DialogSubmitted open={open} handleOpen={handleOpen} />
+      <DialogAmount
+        open={open}
+        handleOpen={handleOpen}
+        amount={'0.000015'}
+        address={'1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71'}
+      />
     </>
   )
 }

@@ -7,9 +7,7 @@ import IconUSD from '@/assets/Icons/IconUSD'
 import { Button } from '@/atoms/Button/Button'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
-import { DialogSubmitted } from '@/components/DialogSubmitted/DialogSubmitted'
-
-import { PackageCardItem } from '../mining/DashboardMiningBitcoinMinersPage'
+import { DialogAmount } from '@/components/DialogAmount/DialogAmount'
 
 export const CloudMiningProductSelected = () => {
   const [open, setOpen] = useState(false)
@@ -256,7 +254,12 @@ export const CloudMiningProductSelected = () => {
           </a>
         </footer>
       </div>
-      <DialogSubmitted open={open} handleOpen={handleOpen} />
+      <DialogAmount
+        open={open}
+        handleOpen={handleOpen}
+        amount={'0.000015'}
+        address={'1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71'}
+      />
     </>
   )
 }
