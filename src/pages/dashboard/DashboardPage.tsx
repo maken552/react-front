@@ -24,7 +24,7 @@ export const DashboardPage = () => {
 
   useEffect(() => {
     dispatch(fetchCartablesDataFromAPI())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -223,106 +223,6 @@ export const DashboardPage = () => {
                     </tr>
                   ))}
               </tbody>
-              {/* <tbody>
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <img src="/logo_eth.png" className="h-6 w-6" />
-                      <div className="flex flex-col">
-                        <Typography className="text-[16px] font-medium leading-6 text-[#000]">
-                          ETH
-                        </Typography>
-                        <Typography className="text-xs leading-4 text-[#909499]">
-                          Ethereum
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="flex flex-col">
-                        <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                          0.00
-                        </Typography>
-                        <Typography className="text-end text-xs leading-4 text-[#909499]">
-                          0.00
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="flex flex-col">
-                        <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                          $70,572
-                        </Typography>
-                        <Typography className="text-end text-xs leading-4 text-[#909499]">
-                          0.00%
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end">
-                      <button
-                        className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
-                        onClick={handleOpen}
-                      >
-                        Buy
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <img src="/logo_bnb.png" className="h-6 w-6" />
-                      <div className="flex flex-col">
-                        <Typography className="text-[16px] font-medium leading-6 text-[#000]">
-                          BNB
-                        </Typography>
-                        <Typography className="text-xs leading-4 text-[#909499]">
-                          BNB
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="flex flex-col">
-                        <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                          0.00
-                        </Typography>
-                        <Typography className="text-end text-xs leading-4 text-[#909499]">
-                          0.00
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end gap-3">
-                      <div className="flex flex-col">
-                        <Typography className="text-end text-[16px] font-medium leading-6 text-[#000]">
-                          $70,572
-                        </Typography>
-                        <Typography className="text-end text-xs leading-4 text-[#909499]">
-                          0.00%
-                        </Typography>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-end">
-                      <button
-                        className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0A0B0D]"
-                        onClick={handleOpen}
-                      >
-                        Buy
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody> */}
             </table>
           </DashboardCard>
           <div className="flex gap-6 py-6">

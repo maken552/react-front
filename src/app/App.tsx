@@ -23,6 +23,7 @@ import { DashboardMiningBitcoinMinersPage } from '@/pages/dashboard/mining/Dashb
 import { DashboardMiningCloudPage } from '@/pages/dashboard/mining/DashboardMiningCloudPage'
 import { DashboardMiningPage } from '@/pages/dashboard/mining/DashboardMiningPage'
 import { DashboardMiningRentalPage } from '@/pages/dashboard/mining/DashboardMiningRentalPage'
+import { SettingsPage } from '@/pages/dashboard/settings/SettingsPage'
 import { HomePage } from '@/pages/home/HomePage'
 import { LegalPage } from '@/pages/legal/LegalPage'
 import { PrivacyPage } from '@/pages/legal/PrivacyPage'
@@ -44,7 +45,7 @@ const App = () => {
     dispatch(fetchRentalsDataFromAPI())
     dispatch(fetchMarketDataFromAPI())
     dispatch(fetchFAQDataFromAPI())
-  }, [])
+  }, [dispatch])
 
   const token = Cookies.get('token')
   const userID = Cookies.get('userID')
@@ -141,6 +142,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <BitcoinMiningProductSelected />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={AppRoutePath.SETTINGS()}
+            element={
+              <ProtectedRoute>
+                <SettingsPage />
               </ProtectedRoute>
             }
           />
