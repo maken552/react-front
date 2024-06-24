@@ -7,7 +7,7 @@ import { IDevice } from '@/types/devices-data.types'
 export const fetchCartablesDataFromAPI = createAsyncThunk(
   'cartables/fetchCartablesData',
   async (thunkAPI) => {
-    const response = await axios.get(`${DOMAIN}/cart/cartables`)
+    const response = await axios.get(`${DOMAIN}/api/cart/cartables`)
 
     console.log('cartable', response)
 

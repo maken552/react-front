@@ -1,11 +1,31 @@
-import { Typography } from '@material-tailwind/react'
+import { Alert, Dialog, Spinner, Typography } from '@material-tailwind/react'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useEffect, useRef, useState } from 'react'
 
-import { AppRoutePath } from '@/app/appRoutePath'
-import { IconLock, IconPersonalAddress, IconPersonalId } from '@/assets/Icons'
+import { AppRoutePath, DOMAIN } from '@/app/appRoutePath'
+import {
+  IconBin,
+  IconLock,
+  IconPersonalAddress,
+  IconPersonalId
+} from '@/assets/Icons'
+import IconCrossOutline from '@/assets/Icons/IconCrossOutline'
+import { Button } from '@/atoms/Button/Button'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
+import { InputText } from '@/atoms/InputText/InputText'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
 
 export const SettingsPage = () => {
+  const [passwordDialogIsOpen, setPasswordDialogIsOpen] = useState(false)
+  const passwordDialogHandler = () =>
+    setPasswordDialogIsOpen(!passwordDialogIsOpen)
+
+  const [verifyIdentityDialogIsOpen, setVerifyIdentityDialogIsOpen] =
+    useState(false)
+  const verifyIdentityDialogHandler = () =>
+    setVerifyIdentityDialogIsOpen(!verifyIdentityDialogIsOpen)
+
   return (
     <>
       <div className="flex min-h-screen flex-col">
@@ -32,7 +52,7 @@ export const SettingsPage = () => {
               name="Password"
               desc="You can update your password by clicking on button"
               action="update"
-              onClick={() => console.log('Password')}
+              onClick={passwordDialogHandler}
             />
             <SettingsPageItem
               icon={<IconPersonalId />}
@@ -40,7 +60,7 @@ export const SettingsPage = () => {
               desc="Verify your identity"
               status="required"
               action="verify"
-              onClick={() => console.log('Personal ID')}
+              onClick={verifyIdentityDialogHandler}
             />
             <SettingsPageItem
               icon={<IconPersonalAddress />}
@@ -73,6 +93,14 @@ export const SettingsPage = () => {
           </a>
         </footer>
       </div>
+      <UpdatePasswordDialog
+        open={passwordDialogIsOpen}
+        handler={passwordDialogHandler}
+      />
+      <VerifyIdentityDialog
+        open={verifyIdentityDialogIsOpen}
+        handler={verifyIdentityDialogHandler}
+      />
     </>
   )
 }
@@ -134,5 +162,350 @@ const SettingsPageItem = ({
         {action === 'update' && 'Update'}
       </button>
     </div>
+  )
+}
+
+interface IUpdatePasswordDialog {
+  open: boolean
+  handler: () => void
+}
+
+const UpdatePasswordDialog = ({ open, handler }: IUpdatePasswordDialog) => {
+  const [alert, setAlert] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const [userInformation, setUserInformation] = useState({
+    password: '',
+    new_password: '',
+    new_password_repeat: ''
+  })
+
+  const handleFormInputChange = (event: any) => {
+    setUserInformation({
+      ...userInformation,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  const PostPasswordUpdateToAPI = () => {
+    setAlert('')
+    setLoading(true)
+    axios
+      .post(
+        `${DOMAIN}/api/settings/profile/password/update`,
+        {
+          old_password: userInformation.password,
+          password: userInformation.new_password,
+          password_confirmation: userInformation.new_password_repeat
+        },
+        {
+          headers: { Authorization: `Bearer ${Cookies.get('token')}` }
+        }
+      )
+      .then(async function (response) {
+        setLoading(false)
+        console.log(response)
+        handler()
+      })
+      .catch(function (error) {
+        setLoading(false)
+        console.log(error)
+        setAlert('Password update failed')
+      })
+  }
+
+  return (
+    <Dialog open={open} handler={handler}>
+      <div className="flex justify-between border-b border-[#F5F5F5] p-4">
+        <Typography className="text-[16px] font-medium leading-6 text-[#0a0b0d]">
+          Update Password
+        </Typography>
+        <button onClick={handler}>
+          <IconCrossOutline />
+        </button>
+      </div>
+      <div className="flex flex-col gap-6 px-4 py-6">
+        <InputText
+          type="password"
+          name="password"
+          label="Old Password"
+          placeholder="Enter your current password"
+          className="w-full"
+          value={userInformation.password}
+          onChange={handleFormInputChange}
+        />
+        <InputText
+          type="password"
+          name="new_password"
+          label="New Password"
+          placeholder="Enter your new password"
+          className="w-full"
+          value={userInformation.new_password}
+          onChange={handleFormInputChange}
+        />
+        <InputText
+          type="password"
+          name="new_password_repeat"
+          label="Repeat New Password"
+          placeholder="Repeat your new password"
+          className="w-full"
+          value={userInformation.new_password_repeat}
+          onChange={handleFormInputChange}
+        />
+      </div>
+      <div className="rounded-b-[16px] bg-[#F5F5F5] p-4">
+        <Button
+          type="primary"
+          onClick={PostPasswordUpdateToAPI}
+          disabled={loading}
+        >
+          {loading && <Spinner />}
+          {!loading && <>Update Password</>}
+        </Button>
+        {alert && (
+          <Alert color="red" className="mt-4 text-xs leading-4">
+            {alert}
+          </Alert>
+        )}
+      </div>
+    </Dialog>
+  )
+}
+
+interface IVerifyIdentityDialog {
+  open: boolean
+  handler: () => void
+}
+
+const VerifyIdentityDialog = ({ open, handler }: IVerifyIdentityDialog) => {
+  const [alert, setAlert] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const [userInformation, setUserInformation] = useState({
+    password: '',
+    new_password: '',
+    new_password_repeat: ''
+  })
+
+  const handleFormInputChange = (event: any) => {
+    setUserInformation({
+      ...userInformation,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  const idFrontFileInputRef = useRef<HTMLInputElement>(null)
+  const idBackFileInputRef = useRef<HTMLInputElement>(null)
+  const selfieFileInputRef = useRef<HTMLInputElement>(null)
+
+  const [idFrontFile, setIdFrontFile] = useState<File | null>(null)
+  const [idBackFile, setIdBackFile] = useState<File | null>(null)
+  const [selfieFile, setSelfieFile] = useState<File | null>(null)
+
+  const handleIdFrontFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setIdFrontFile(e.target.files[0])
+    }
+  }
+  const handleIdBackFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setIdBackFile(e.target.files[0])
+    }
+  }
+  const handleSelfieFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelfieFile(e.target.files[0])
+    }
+  }
+
+  const handleIdFrontFileUploadClick = () => {
+    idFrontFileInputRef.current?.click()
+  }
+  const handleIdBackFileUploadClick = () => {
+    idBackFileInputRef.current?.click()
+  }
+  const handleSelfieFileUploadClick = () => {
+    selfieFileInputRef.current?.click()
+  }
+
+  const removeIdFrontFile = () => {
+    idFrontFileInputRef.current!.value = ''
+    setIdFrontFile(null)
+  }
+  const removeIdBackFile = () => {
+    idBackFileInputRef.current!.value = ''
+    setIdBackFile(null)
+  }
+  const removeSelfieFile = () => {
+    selfieFileInputRef.current!.value = ''
+    setSelfieFile(null)
+  }
+
+  useEffect(() => {
+    console.log(idFrontFile, idBackFile, selfieFile)
+  }, [idFrontFile, idBackFile, selfieFile])
+
+  const PostIdentityVerificationToAPI = () => {
+    setAlert('')
+    setLoading(true)
+
+    const formData = new FormData()
+
+    if (idFrontFile) {
+      formData.append('ID_front_image', idFrontFile)
+    }
+    if (idBackFile) {
+      formData.append('ID_back_image', idBackFile)
+    }
+    if (selfieFile) {
+      formData.append('selfie_image', selfieFile)
+    }
+
+    axios
+      .post(`${DOMAIN}/api/settings/profile/identity/verification`, formData, {
+        headers: { Authorization: `Bearer ${Cookies.get('token')}` }
+      })
+      .then(async function (response) {
+        setLoading(false)
+        console.log(response)
+        handler()
+      })
+      .catch(function (error) {
+        setLoading(false)
+        console.log(error)
+        setAlert('Identity Verification Upload Failed')
+      })
+  }
+
+  return (
+    <Dialog open={open} handler={handler}>
+      <div className="flex justify-between border-b border-[#F5F5F5] p-4">
+        <Typography className="text-[16px] font-medium leading-6 text-[#0a0b0d]">
+          Proof of Identity
+        </Typography>
+        <button onClick={handler}>
+          <IconCrossOutline />
+        </button>
+      </div>
+      <div className="flex flex-col gap-6 px-4 py-6">
+        <input
+          type="file"
+          onChange={handleIdFrontFileChange}
+          className="hidden"
+          ref={idFrontFileInputRef}
+        />
+        <input
+          type="file"
+          onChange={handleIdBackFileChange}
+          className="hidden"
+          ref={idBackFileInputRef}
+        />
+        <input
+          type="file"
+          onChange={handleSelfieFileChange}
+          className="hidden"
+          ref={selfieFileInputRef}
+        />
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <Typography className="font-medium leading-6 text-[#0a0b0d]">
+              ID Front
+            </Typography>
+            <Typography className="text-xs leading-4 text-[#909499]">
+              Proof of Identity Front
+            </Typography>
+          </div>
+          {idFrontFile === null && (
+            <button
+              onClick={handleIdFrontFileUploadClick}
+              className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0a0b0d]"
+            >
+              Upload
+            </button>
+          )}
+          {idFrontFile !== null && (
+            <div className="flex w-[200px] items-center justify-between rounded-[12px] border border-dashed border-[#DFDFDF] px-6 py-4">
+              <Typography className="max-w-[120px] truncate text-xs text-[#909499]">
+                {idFrontFile.name}
+              </Typography>
+              <button onClick={removeIdFrontFile}>
+                <IconBin />
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <Typography className="font-medium leading-6 text-[#0a0b0d]">
+              ID Back
+            </Typography>
+            <Typography className="text-xs leading-4 text-[#909499]">
+              Proof of Identity Back
+            </Typography>
+          </div>
+          {idBackFile === null && (
+            <button
+              onClick={handleIdBackFileUploadClick}
+              className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0a0b0d]"
+            >
+              Upload
+            </button>
+          )}
+          {idBackFile !== null && (
+            <div className="flex w-[200px] items-center justify-between rounded-[12px] border border-dashed border-[#DFDFDF] px-6 py-4">
+              <Typography className="max-w-[120px] truncate text-xs text-[#909499]">
+                {idBackFile.name}
+              </Typography>
+              <button onClick={removeIdBackFile}>
+                <IconBin />
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <Typography className="font-medium leading-6 text-[#0a0b0d]">
+              Selfie with ID
+            </Typography>
+            <Typography className="text-xs leading-4 text-[#909499]">
+              Selfie with Proof of Identity
+            </Typography>
+          </div>
+          {selfieFile === null && (
+            <button
+              onClick={handleSelfieFileUploadClick}
+              className="rounded-[32px] bg-[#F4F8FD] px-4 py-2 text-sm font-semibold leading-6 text-[#0a0b0d]"
+            >
+              Upload
+            </button>
+          )}
+          {selfieFile !== null && (
+            <div className="flex w-[200px] items-center justify-between rounded-[12px] border border-dashed border-[#DFDFDF] px-6 py-4">
+              <Typography className="max-w-[120px] truncate text-xs text-[#909499]">
+                {selfieFile.name}
+              </Typography>
+              <button onClick={removeSelfieFile}>
+                <IconBin />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="rounded-b-[16px] bg-[#F5F5F5] p-4">
+        <Button
+          type="primary"
+          onClick={PostIdentityVerificationToAPI}
+          disabled={loading}
+        >
+          {loading && <Spinner />}
+          {!loading && <>Send for Verification</>}
+        </Button>
+        {alert && (
+          <Alert color="red" className="mt-4 text-xs leading-4">
+            {alert}
+          </Alert>
+        )}
+      </div>
+    </Dialog>
   )
 }

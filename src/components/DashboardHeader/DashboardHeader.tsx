@@ -90,7 +90,8 @@ export const DashboardHeader = () => {
           <Link
             to={AppRoutePath.SETTINGS()}
             className={cn(
-              'flex items-center gap-2 rounded-[8px] p-2 pr-4 text-sm font-medium leading-6 text-[#fff]'
+              'flex items-center gap-2 rounded-[8px] p-2 pr-4 text-sm font-medium leading-6 text-[#fff]',
+              location.pathname === AppRoutePath.SETTINGS() && 'bg-[#0A53D6]'
             )}
           >
             <svg
