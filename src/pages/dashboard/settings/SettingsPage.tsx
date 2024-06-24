@@ -32,7 +32,7 @@ export const SettingsPage = () => {
         {/* Info Banner */}
         <div className="bg-[#FFD91533] p-2 text-center text-xs font-semibold leading-4 text-[#AF8900]">
           Profile is being reviewed. After full verification you will access all
-          the functionalities
+          the functionalities.
         </div>
         {/* Dashboard Header */}
         <DashboardHeader />
