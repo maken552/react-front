@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
+import cartablesSliceReducer from './features/cartablesSlice/cartablesSlice'
 import devicesSliceReducer from './features/devicesSlice/devicesSlice'
 import faqSliceReducer from './features/faqSlice/faqSlice'
 import marketSliceReducer from './features/marketSlice/marketSlice'
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   faq: faqSliceReducer,
   devices: devicesSliceReducer,
   rentals: rentalsSliceReducer,
-  market: marketSliceReducer
+  market: marketSliceReducer,
+  cartables: cartablesSliceReducer
 })
 
 export const store = configureStore({

@@ -1,7 +1,8 @@
 import { Radio, Typography } from '@material-tailwind/react'
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
-import { AppRoutePath } from '@/app/appRoutePath'
+import { AppRoutePath, DOMAIN } from '@/app/appRoutePath'
 import IconBTC from '@/assets/Icons/IconBTC'
 import IconUSD from '@/assets/Icons/IconUSD'
 import { Button } from '@/atoms/Button/Button'
@@ -12,6 +13,35 @@ import { DialogAmount } from '@/components/DialogAmount/DialogAmount'
 export const CloudMiningProductSelected = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
+
+  const getDataFromCart = () => {
+    axios
+      .get(`${DOMAIN}/api/cart/cartables`)
+      .then(async function (response) {
+        console.log('/cart/cartables', response)
+      })
+      .catch(function (error) {
+        console.log('/cart/cartables', error)
+      })
+  }
+
+  const AddCartableToCart = () => {
+    axios
+      .post(`${DOMAIN}/api/carts/add`, {
+        // cartable_type: //one of cartables
+        // cartable_id: 1
+      })
+      .then(async function (response) {
+        console.log('/api/carts/add', response)
+      })
+      .catch(function (error) {
+        console.log('/api/carts/add', error)
+      })
+  }
+
+  useEffect(() => {
+    getDataFromCart()
+  }, [])
 
   return (
     <>

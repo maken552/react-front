@@ -1,13 +1,14 @@
 import { Typography } from '@material-tailwind/react'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { fetchCartablesDataFromAPI } from '@/api/slices/Cartables.api'
 import { AppRoutePath } from '@/app/appRoutePath'
 import { DashboardCard } from '@/atoms/DashboardCard/DashboardCard'
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader'
 import { DialogVerification } from '@/components/DialogVerification/DialogVerification'
-import { RootState } from '@/store'
+import { AppDispatch, RootState } from '@/store'
 
 export const DashboardPage = () => {
   const [open, setOpen] = useState(false)
@@ -18,6 +19,12 @@ export const DashboardPage = () => {
   const coinTable = useSelector(
     (state: RootState) => state.user.relationships?.wallets
   )
+
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    dispatch(fetchCartablesDataFromAPI())
+  }, [])
 
   return (
     <>
